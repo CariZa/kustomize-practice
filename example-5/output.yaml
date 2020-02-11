@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  FOO: Bar
+kind: ConfigMap
+metadata:
+  annotations:
+    note: generated
+  labels:
+    type: generated
+  name: example-configmap-3
