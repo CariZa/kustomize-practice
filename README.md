@@ -29,13 +29,17 @@ To apply those Resources, run kubectl apply with --kustomize or -k flag:
 - secretGenerator
 - cross cutting fields
 - composing (combining)
-    - patchesStrategicMerge (use this one)
+- customizing
+    - patchesStrategicMerge 
+    - patchesJson6902
+    - vars
+- bases & overlays
 
 # configMapGenerator
 
 ## Example 1
 
-$ mkdir example-1
+`$ mkdir example-1`
 
 /example-1
 
@@ -70,13 +74,13 @@ metadata:
 name: example-configmap-1-8mbdf7882g
 ```
 
-$ kubectl kustomize example-1/ > example-1/output.yaml
+`$ kubectl kustomize example-1/ > example-1/output.yaml`
 
 
 
 ## Example 2
 
-$ mkdir example-2
+`$ mkdir example-2`
 
 /example-2
 
@@ -90,7 +94,7 @@ configMapGenerator:
 EOF
 ```
 
-$ kubectl kustomize example-2/ > example-2/output.yaml
+`$ kubectl kustomize example-2/ > example-2/output.yaml`
 
 
 # secretGenerator
@@ -98,7 +102,7 @@ $ kubectl kustomize example-2/ > example-2/output.yaml
 
 ## Example 3
 
-$ mkdir example-3
+`$ mkdir example-3`
 
 /example-3
 
@@ -118,12 +122,12 @@ secretGenerator:
 EOF
 ```
 
-$ kubectl kustomize ./example-3 > example-3/output.yaml
+`$ kubectl kustomize ./example-3 > example-3/output.yaml`
 
 
 ## Example 4
 
-$ mkdir example-4
+`$ mkdir example-4`
 
 /example-4
 
@@ -137,7 +141,7 @@ secretGenerator:
 EOF
 ```
 
-$ kubectl kustomize ./example-4 > example-4/output.yaml
+`$ kubectl kustomize ./example-4 > example-4/output.yaml`
 
 
 
@@ -145,7 +149,7 @@ $ kubectl kustomize ./example-4 > example-4/output.yaml
 
 ## Example 5
 
-$ mkdir example-5
+`$ mkdir example-5`
 
 /example-5
 
@@ -168,11 +172,11 @@ generatorOptions:
 EOF
 ```
 
-$ kubectl kustomize example-5/ > example-5/output.yaml
+`$ kubectl kustomize example-5/ > example-5/output.yaml`
 
 ## Example 6
 
-$ mkdir example-6
+`$ mkdir example-6`
 
 /example-6
 
@@ -224,13 +228,15 @@ resources:
 EOF
 ```
 
+`$ kubectl kustomize example-6/ > example-6/output.yaml`
+
 # Composing and Customizing Resources
 
 ## Example 7
 
 ### Composing
 
-$ mkdir example-7
+`$ mkdir example-7`
 
 /example-7
 
@@ -281,7 +287,7 @@ EOF
 
 
 ```
-cat <<EOF >./example-7/kustomization.yaml
+`cat <<EOF >./example-7/kustomization.yaml`
 resources:
 - deployment.yaml
 - service.yaml
@@ -289,15 +295,15 @@ EOF
 ```
 
 
-$ kubectl kustomize ./example-7 > ./example-7/output.yaml
+`$ kubectl kustomize ./example-7 > ./example-7/output.yaml`
 
-
-apply different customizations by applying patches
-
+___
 
 ### Customizing
 
 Patches - summary
+
+apply different customizations by applying patches
 
 Support for different patching mechanisms:
 - patchesStrategicMerge
@@ -308,11 +314,11 @@ Support for different patching mechanisms:
     - https://tools.ietf.org/html/rfc6902
     - To support modifying arbitrary fields in arbitrary Resources, Kustomize offers applying JSON patch
 
-
+___
 
 ## Example 8
 
-$ mkdir example-8
+`$ mkdir example-8`
 
 /example-8
 
@@ -389,13 +395,13 @@ patchesStrategicMerge:
 EOF
 ```
 
-$ kubectl kustomize example-8/ > example-8/output.yaml
+`$ kubectl kustomize example-8/ > example-8/output.yaml`
 
 
 
 ## Example 9
 
-$ mkdir example-9
+`$ mkdir example-9`
 
 /example-9
 
@@ -456,7 +462,7 @@ patchesJson6902:
 EOF
 ```
 
-$ kubectl kustomize example-9/ > example-9/output.yaml
+`$ kubectl kustomize example-9/ > example-9/output.yaml`
 
 ## Example 10
 
@@ -501,13 +507,13 @@ images:
 EOF
 ```
 
-$ kubectl kustomize example-10/ > example-10/output.yaml
+`$ kubectl kustomize example-10/ > example-10/output.yaml`
 
 
 
 ## Example 11
 
-$ mkdir example-11
+`$ mkdir example-11`
 
 /example-11
 
@@ -572,18 +578,20 @@ vars:
 EOF
 ```
 
+`$ kubectl kustomize example-11/ > example-11/output.yaml`
+
 ## Bases and Overlays
 
 ## Example 12
 
-$ mkdir example-12
+`$ mkdir example-12`
 
 /example-12
 
-```
-# Create a directory to hold the base
-mkdir example-12/base
-```
+reate a directory to hold the base
+
+`$ mkdir example-12/base`
+
 /example-12/base
 
 ```
@@ -651,7 +659,7 @@ namePrefix: prod-
 EOF
 ```
 
-
+`$ kubectl kustomize example-12/ > example-12/output.yaml`
 
 ## apply/view/delete objects using Kustomize
 
